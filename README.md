@@ -12,11 +12,11 @@ docker compose up -d
 
 3. Replace environment variables
 
-4. Run the command ``` npm install ```
+4. Run the command `npm install`
 
-5. Run the command ``` npm run dev ```
+5. Run the command `npm run dev`
 
-6. Run the commands ``` npx prisma migrate dev ``` and ``` npx prisma generate ```
+6. Run the commands `npx prisma migrate dev` and `npx prisma generate`
 
 7. Execute the SEED to [create the local database](localhost:3000/api/seed)
 
@@ -27,3 +27,8 @@ npx prisma init
 npx prisma migrate dev
 npx prisma generate
 ```
+
+## Note: Default user
+
+**user**: test@test.com
+**password**: asdasd

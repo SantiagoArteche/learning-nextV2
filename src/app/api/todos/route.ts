@@ -1,6 +1,8 @@
 import prisma from "@/app/lib/prisma";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import * as Yup from "yup";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function GET(request: Request, response: Response) {
   const { searchParams } = new URL(request.url);
@@ -29,12 +31,21 @@ const postSchema = Yup.object({
 });
 
 export async function POST(request: Request) {
+  const session = await getServerSession(authOptions);
+  const user = session?.user;
+
+  if (!user) {
+    return NextResponse.json("Unauthorized");
+  }
+
   try {
     const { complete, description } = await postSchema.validate(
       await request.json()
     );
 
-    const todo = await prisma.todo.create({ data: { complete, description } });
+    const todo = await prisma.todo.create({
+      data: { complete, description, userId: user.id },
+    });
 
     return NextResponse.json(todo);
   } catch (error) {

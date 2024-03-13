@@ -10,6 +10,8 @@ export const NewTodo = () => {
   const pathName = usePathname();
 
   const newTodo = async (description: string) => {
+
+    
     if (pathName === "/dashboard/server-todos") {
       return addTodo(description);
     } else {

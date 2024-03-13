@@ -25,7 +25,7 @@ export const DeleteTodo = () => {
     <button
       onClick={() => deleteCompleted()}
       type="button"
-      className="flex items-center justify-center rounded ml-2 bg-red-400 p-2 mb-2 w-72 text-white hover:bg-red-700 transition-all"
+      className="flex items-center justify-center rounded ml-2 bg-red-500 p-2 mb-2 w-72 text-white hover:bg-red-700 transition-all"
     >
       <IoTrashOutline size={30} />
       Delete Completed Todos
