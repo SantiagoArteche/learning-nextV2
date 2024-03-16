@@ -54,8 +54,16 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE(request: Request) {
+  const session = await getServerSession(authOptions);
+  const user = session?.user;
+
+  if (!user) {
+    return NextResponse.json("Unauthorized");
+  }
   try {
-    await prisma.todo.deleteMany({ where: { complete: true } });
+    await prisma.todo.deleteMany({
+      where: { complete: true, userId: user.id },
+    });
 
     return NextResponse.json({
       msg: "Todos deleted",
