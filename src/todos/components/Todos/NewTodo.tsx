@@ -10,8 +10,6 @@ export const NewTodo = () => {
   const pathName = usePathname();
 
   const newTodo = async (description: string) => {
-
-    
     if (pathName === "/dashboard/server-todos") {
       return addTodo(description);
     } else {
@@ -28,7 +26,7 @@ export const NewTodo = () => {
       description: "",
     },
     validateOnChange: false,
-    onSubmit: async ({ description }) => {
+    onSubmit: ({ description }) => {
       if (description.trim().length === 0) return;
 
       newTodo(description);

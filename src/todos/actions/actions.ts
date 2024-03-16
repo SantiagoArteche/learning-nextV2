@@ -1,7 +1,10 @@
 "use server";
 
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/app/lib/prisma";
 import { Todo } from "@prisma/client";
+import { getServerSession } from "next-auth";
+import { getSession } from "next-auth/react";
 import { revalidatePath } from "next/cache";
 
 export const toggleTodo = async (
@@ -22,8 +25,12 @@ export const toggleTodo = async (
 };
 
 export const addTodo = async (description: string) => {
+  const session = await getServerSession(authOptions);
+
   try {
-    const todo = await prisma.todo.create({ data: { description } });
+    const todo = await prisma.todo.create({
+      data: { description, userId: session?.user?.id },
+    });
 
     revalidatePath("/dashboard/server-todos");
 

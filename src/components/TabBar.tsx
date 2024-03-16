@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const TabBar = ({
-  tabOptions = [1, 2, 3, 4],
+  tabOptions = [1, 2, 3, 4, 5],
   currentTab = 1,
 }: Props) => {
   const [selected, setSelected] = useState(currentTab);
@@ -20,9 +20,12 @@ export const TabBar = ({
     setCookie("selectedTab", JSON.stringify(selectedTab));
     router.refresh();
   };
+
   return (
     <div
-      className={`grid w-full grid-cols-${tabOptions?.length} space-x-2 rounded-xl bg-gray-200 p-2 mt-2`}
+      className={`grid w-full ${
+        "grid-cols-" + tabOptions.length
+      } space-x-2 rounded-xl bg-gray-200 p-2 mt-2`}
     >
       {tabOptions.map((tab) => (
         <div key={tab}>
